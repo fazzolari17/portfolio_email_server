@@ -1,0 +1,19 @@
+@PORT= 3001
+@api_key=bearer {{$dotenv %EMAIL_SERVER_API_KEY}}
+
+# Test that the server is up an running
+GET http://localhost:{{PORT}}/ping
+
+
+###
+
+# send to the email route that will send the information to email address
+POST http://localhost:{{PORT}}/email
+Content-Type: application/json
+Authorization: {{api_key}}
+
+{
+  "name": "Root User",
+  "email": "backend@email.com",
+  "message": "Testing one, two, three. Message From Backend TEST!"
+}

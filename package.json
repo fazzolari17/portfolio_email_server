@@ -1,0 +1,23 @@
+{
+  "name": "portfolio_email_server",
+  "version": "1.0.0",
+  "description": "an email server for my portfolio website",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "NODE_ENV=production node index.js",
+    "dev": "NODE_ENV=development nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Giuseppe Fazzolari (2023)",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "generate-api-key": "^1.0.2",
+    "http": "^0.0.1-security",
+    "nodemailer": "^6.9.5",
+    "nodemon": "^3.0.1"
+  }
+}

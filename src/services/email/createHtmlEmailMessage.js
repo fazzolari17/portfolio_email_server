@@ -87,10 +87,10 @@ const createHtmlEmailMessage = (emailMessage, locationData, coordinates, ipLocat
             <h3>Zip Code: </h3><p> ${ipLocationData.zip} </p>
           </div>
           <div class='block'>
-            <h3>IP Lat: </h3><p> ${ipLocationData.location.latitude}</p>
+            <h3>IP Lat: </h3><p> ${ipLocationData.latitude}</p>
           </div>
           <div class='block'>
-            <h3>IP Lon: </h3><p> ${ipLocationData.location.longitude} </p>
+            <h3>IP Lon: </h3><p> ${ipLocationData.longitude} </p>
           </div>
         </div>
       </div>

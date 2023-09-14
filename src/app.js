@@ -2,11 +2,9 @@ import express from 'express';
 import cors from 'cors';
 import emailRouter from './routes/email.js';
 import middleware from './utils/middelware.js'
-import expressIp from 'express-ip';
 
 const app = express();
 
-app.use(expressIp().getIpInfoMiddleware);
 app.use(express.json());
 app.use(cors());
 

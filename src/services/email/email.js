@@ -1,9 +1,7 @@
 import { createTransport } from 'nodemailer';
 import axios from 'axios';
 import dotenv from 'dotenv';
-import fetchLocation from '../../utils/fetchLocationFromGps.js';
 import createHtmlEmailMessage from './createHtmlEmailMessage.js';
-import fetchLocationFromIp from '../../utils/fetchLocationFromIp.js';
 dotenv.config();
 
 const transporter = createTransport({
@@ -14,26 +12,36 @@ const transporter = createTransport({
   },
 });
 
+const fetchLocationFromGps = async (locationData) => {
+  const { latitude, longitude } = locationData;
+
+  const locationUrl = `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`;
+
+  const response = await axios.get(locationUrl);
+  return response.data;
+};
+
+const fetchLocationFromIp = async (ipAddress) => {
+  const uri = `http://api.ipapi.com/api/${ipAddress}?access_key=${process.env.IP_LOOKUP_API_KEY}`;
+  const response = await axios.get(uri);
+
+  return response.data;
+};
 
 async function main(contactInfo, ip) {
-  const { name, email, message, phone, organization } =
-    contactInfo.emailMessage;
-  const { latitude, longitude, accuracy } = contactInfo.locationData;
-  console.error(contactInfo.locationData);
+  const { name, email, message, phone, organization } = contactInfo.body.emailMessage;
+  const { latitude, longitude, accuracy } = contactInfo.body.locationData;
   let locationData;
 
   if (latitude && longitude) {
-    locationData = await fetchLocation(contactInfo.locationData).catch(error => console.error(error));
+    locationData = await fetchLocation(contactInfo.body.locationData).catch(error => console.error(error));
   } else if (!latitude || !longitude){
     locationData = { latitude: null, longitude: null, accuracy: null }
   }
 
   const ipLocationData = await fetchLocationFromIp(ip).catch(error => console.error(error));
 
-  
-  
-
-  const htmlEmailMessage = createHtmlEmailMessage(contactInfo.emailMessage, locationData, contactInfo.locationData, ipLocationData)
+  const htmlEmailMessage = createHtmlEmailMessage(contactInfo.body.emailMessage, locationData, contactInfo.body.locationData, ipLocationData, contactInfo)
 
   
   // send mail with defined transport object
@@ -51,14 +59,4 @@ async function main(contactInfo, ip) {
   return { Message: info.messageId };
 }
 
-// Remove this after it is working coorectly
-// main().catch(console.error);
-// main({
-//   emailMessage: {
-//     name: 'giuseppe fazzolari',
-//     email: 'root@gmail.com',
-//     message: 'hey',
-//   },
-//   locationData: { latitude: '35.3578369', longitude: '-83.1828001' },
-// });
 export default { main };

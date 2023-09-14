@@ -13,8 +13,6 @@ emailRouter.post('/', async (req, res) => {
   const ip = req.ip;
   const { email, name, message } = req.body.emailMessage;
   const { latitude, longitude, accuracy } = req.body.locationData;
-  // console.log(email, name, message);
-  // console.log(req.body);
 
   const confirmation = await emailService.main(req.body, ip).catch(console.error());
   res.status(200).send(confirmation)

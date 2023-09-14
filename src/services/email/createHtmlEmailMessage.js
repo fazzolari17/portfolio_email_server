@@ -8,6 +8,8 @@ const createHtmlEmailMessage = (emailMessage, locationData, coordinates, ipLocat
 
   const { addresstype, display_name, type, address: { road, county, state, country } } = locationData
 
+  console.log(ipLocationData.location)
+
 
   return `
   </html>
@@ -62,9 +64,9 @@ const createHtmlEmailMessage = (emailMessage, locationData, coordinates, ipLocat
           <div class='block'>
             <h3>Map: </h3>
             ${
-              ipLocationData.location.latitude &&
-              ipLocationData.location.longitude
-                ? `<a href='https://www.openstreetmap.org/search?whereami=1&query=${ipLocationData.location.latitude}%2C${ipLocationData.location.longitude}#map=16/${ipLocationData.location.latitude}/${ipLocationData.location.longitude}' target=_blank rel=noreferrer>
+              ipLocationData.latitude &&
+              ipLocationData.longitude
+                ? `<a href='https://www.openstreetmap.org/search?whereami=1&query=${ipLocationData.latitude}%2C${ipLocationData.longitude}#map=16/${ipLocationData.latitude}/${ipLocationData.longitude}' target=_blank rel=noreferrer>
               <p> VIEW ON MAP</p>
             </a>`
                 : `<p>null</p>`

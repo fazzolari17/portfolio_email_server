@@ -1,8 +1,9 @@
 import { createTransport } from 'nodemailer';
 import axios from 'axios';
 import dotenv from 'dotenv';
-import fetchLocation from '../../utils/fetchLocation.js';
+import fetchLocation from '../../utils/fetchLocationFromGps.js';
 import createHtmlEmailMessage from './createHtmlEmailMessage.js';
+import fetchLocationFromIp from '../../utils/fetchLocationFromIp.js';
 dotenv.config();
 
 const transporter = createTransport({
@@ -27,10 +28,12 @@ async function main(contactInfo, ip) {
     locationData = { latitude: null, longitude: null, accuracy: null }
   }
 
+  const ipLocationData = await fetchLocationFromIp(ip);
+
   
   
 
-  const htmlEmailMessage = createHtmlEmailMessage(contactInfo.emailMessage, locationData, contactInfo.locationData)
+  const htmlEmailMessage = createHtmlEmailMessage(contactInfo.emailMessage, locationData, contactInfo.locationData, ipLocationData)
 
   
   // send mail with defined transport object

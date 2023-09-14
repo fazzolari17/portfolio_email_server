@@ -4,7 +4,6 @@ import emailRouter from './routes/email.js';
 import middleware from './utils/middelware.js'
 
 const app = express();
-// const PORT = process.env.port || 3001;
 
 app.use(express.json());
 app.use(cors());

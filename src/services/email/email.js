@@ -22,7 +22,7 @@ async function main(contactInfo, ip) {
   let locationData;
 
   if (latitude && longitude) {
-    locationData = await fetchLocation(contactInfo.locationData);
+    locationData = await fetchLocation(contactInfo.locationData).catch(error => console.error(error));
   } else if (!latitude || !longitude){
     locationData = { latitude: null, longitude: null, accuracy: null }
   }

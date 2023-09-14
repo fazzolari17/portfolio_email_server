@@ -28,7 +28,7 @@ async function main(contactInfo, ip) {
     locationData = { latitude: null, longitude: null, accuracy: null }
   }
 
-  const ipLocationData = await fetchLocationFromIp(ip);
+  const ipLocationData = await fetchLocationFromIp(ip).catch(error => console.error(error));
 
   
   

@@ -43,7 +43,7 @@ async function main(contactInfo, ip) {
     to: ['fazzolari17@gmail.com'], // list of receivers
     subject: `New Message from Portfolio Website from ${name} at ${organization}`,
     html: htmlEmailMessage,
-  });
+  }).catch(error => console.error(error));
 
   console.log('Message sent: %s', info.messageId);
   console.log('Message sent: %s', info.envelope);

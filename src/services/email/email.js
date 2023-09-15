@@ -1,16 +1,7 @@
-import { createTransport } from 'nodemailer';
 import axios from 'axios';
-import dotenv from 'dotenv';
 import createHtmlEmailMessage from './createHtmlEmailMessage.js';
-dotenv.config();
+import mailConfig from '../../config/email_config.js'
 
-const transporter = createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.GOOGLE_USERNAME,
-    pass: process.env.GOOGLE_APP_KEY,
-  },
-});
 
 const fetchLocationFromGps = async (locationData) => {
   const { latitude, longitude } = locationData;
@@ -45,12 +36,10 @@ async function main(contactInfo, ip) {
 
   
   // send mail with defined transport object
-  const info = await transporter.sendMail({
-    from: '"Fred Foo 👻" <foo@example.com>', // sender address
+  const info = await mailConfig.zohoTransporter.sendMail({
+    from: process.env.ZOHO_USERNAME,
     to: ['fazzolari17@gmail.com'], // list of receivers
-    subject: `New Message from Portfolio Website from ${name} at ${organization}`, // Subject line
-    // text: 'Hello world?', // plain text body
-    // html: '< b > Hello world?</b> ', // html body
+    subject: `New Message from Portfolio Website from ${name} at ${organization}`,
     html: htmlEmailMessage,
   });
 

@@ -1,6 +1,8 @@
 import axios from 'axios';
 import createHtmlEmailMessage from './createHtmlEmailMessage.js';
 import mailConfig from '../../config/email_config.js'
+import dotenv from 'dotenv'
+dotenv.config();
 
 
 const fetchLocationFromGps = async (locationData) => {

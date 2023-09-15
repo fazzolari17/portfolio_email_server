@@ -34,7 +34,7 @@ async function main(contactInfo, ip) {
   let locationData;
 
   if (latitude && longitude) {
-    locationData = await fetchLocation(contactInfo.body.locationData).catch(error => console.error(error));
+    locationData = await fetchLocationFromGps(contactInfo.body.locationData).catch(error => console.error(error));
   } else if (!latitude || !longitude){
     locationData = { latitude: null, longitude: null, accuracy: null }
   }

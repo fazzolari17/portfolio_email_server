@@ -35,8 +35,8 @@ const createHtmlEmailMessage = (emailMessage, locationData, coordinates, ipLocat
       <h2>Email Address<h2>
       <h3>Email: </h3><p>${email}</p>
       <hr>
-      <h2>Message<h2>
-      <p>${message}</p>
+      <h2>Message: <h2>
+      <h3>Message: </h3><p>${message}</p>
       <hr>
       <h2>Phone Number</h2>
       <h3>Phone: </h3>

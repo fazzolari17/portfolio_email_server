@@ -7,6 +7,8 @@
   "scripts": {
     "start": "NODE_ENV=production node index.js",
     "dev": "NODE_ENV=development nodemon index.js",
+    "docker": "docker compose up --build",
+    "docker:dev": "docker compose -f docker-compose.dev.yml up --build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Giuseppe Fazzolari (2023)",

@@ -8,9 +8,6 @@ const createHtmlEmailMessage = (emailMessage, locationData, coordinates, ipLocat
 
   const { addresstype, display_name, type, address: { road, county, state, country } } = locationData
 
-  console.log(ipLocationData.location)
-
-
   return `
   </html>
     <head>
